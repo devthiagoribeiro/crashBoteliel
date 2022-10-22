@@ -27,7 +27,7 @@ def analise(lista):
         else:
             bot.sendMessage(channelid, '🔄Vamos para o gale 1')
     elif (lista[11] == 1.00) and (lista[10] >= 2.00):
-        if lista[0] >= 2.00:
+        if (lista[0] >= 2.00) and (lista[1] < 2.00):
             bot.sendMessage(channelid, f'🏆Win!!')
         else:
             bot.sendMessage(channelid, '❌Loss!!')

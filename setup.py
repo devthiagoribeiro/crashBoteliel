@@ -15,8 +15,6 @@ bot_token = os.environ.get('BOT_TOKEN')
 channelid = os.environ.get('CHANNEL_ID')
 link_blaze = '<a href="https://blaze.com/pt/games/crash">💻Blaze</a>'
 bot = telepot.Bot(bot_token)
-win = 0
-loss = 0
 
 def analise(lista):
     if (lista[7] == 1.00) and (lista[6] >= 2.00):
@@ -26,19 +24,13 @@ def analise(lista):
     elif (lista[10] == 1.00) and (lista[9] >= 2.00):
         if lista[0] >= 2.00:
             bot.sendMessage(channelid, f'🏆Win!!')
-            win += 1
-            bot.sendMessage(channelid, f'PLACAR\n\nQuantidade total de wins: {win}\nQuantidade total de loss: {loss}')
         else:
             bot.sendMessage(channelid, '🔄Vamos para o gale 1')
     elif (lista[11] == 1.00) and (lista[10] >= 2.00):
         if (lista[0] >= 2.00) and (lista[1] < 2.00):
             bot.sendMessage(channelid, f'🏆Win!!')
-            win += 1
-            bot.sendMessage(channelid, f'PLACAR\n\nQuantidade total de wins: {win}\nQuantidade total de loss: {loss}')
         elif (lista[0] < 2.00) and (lista[1] < 2.00):
             bot.sendMessage(channelid, '❌Loss!!')
-            loss += 1
-            bot.sendMessage(channelid, f'PLACAR\n\nQuantidade total de wins: {win}\nQuantidade total de loss: {loss}')
 def rodarBot():
     page = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH') ,options=options)
     page.get('https://blaze.com/pt/games/crash')

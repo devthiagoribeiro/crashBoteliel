@@ -27,15 +27,18 @@ def analise(lista):
         if lista[0] >= 2.00:
             bot.sendMessage(channelid, f'🏆Win!!')
             win += 1
+            bot.sendMessage(channelid, f'PLACAR\n\nQuantidade total de wins: {win}\nQuantidade total de loss: {loss}')
         else:
             bot.sendMessage(channelid, '🔄Vamos para o gale 1')
     elif (lista[11] == 1.00) and (lista[10] >= 2.00):
         if (lista[0] >= 2.00) and (lista[1] < 2.00):
             bot.sendMessage(channelid, f'🏆Win!!')
             win += 1
+            bot.sendMessage(channelid, f'PLACAR\n\nQuantidade total de wins: {win}\nQuantidade total de loss: {loss}')
         elif (lista[0] < 2.00) and (lista[1] < 2.00):
             bot.sendMessage(channelid, '❌Loss!!')
             loss += 1
+            bot.sendMessage(channelid, f'PLACAR\n\nQuantidade total de wins: {win}\nQuantidade total de loss: {loss}')
 def rodarBot():
     page = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH') ,options=options)
     page.get('https://blaze.com/pt/games/crash')
@@ -47,7 +50,6 @@ def rodarBot():
         floats = [float(x) for x in results[0:15]]
         print(floats)
         analise(floats)
-        bot.sendMessage(channelid, f'PLACAR\n\nQuantidade total de wins: {win}\nQuantidade total de loss: {loss}')
         results_b = results
         while (results_b[0] == results[0]) and (results_b[1] == results[1]):
             ppg = page.find_element(By.XPATH, '//*[@id="crash-recent"]/div[2]/div[2]').get_attribute('textContent')

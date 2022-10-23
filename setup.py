@@ -39,7 +39,7 @@ def rodarBot():
     while True:
         entries = page.find_element(By.XPATH, '//*[@id="crash-recent"]/div[2]/div[2]').get_attribute('textContent')
         results = entries.split('X')
-        floats = [float(x) for x in results[0:15]]
+        floats = list(map(lambda x: float(x), results[:15]))
         print(floats)
         analise(floats)
         results_b = results
@@ -47,11 +47,10 @@ def rodarBot():
             ppg = page.find_element(By.XPATH, '//*[@id="crash-recent"]/div[2]/div[2]').get_attribute('textContent')
             results_b = ppg.split('X')
         page.refresh()
-        while page.find_element(By.XPATH, '//*[@id="crash-controller"]/div[1]/div[2]/div[1]/div[1]/button[2]').get_attribute('textContent') != '2x':
+        wait_selector = ''
+        while wait_selector != '2x':
+            wait_selector = page.find_element(By.XPATH, '//*[@id="crash-controller"]/div[1]/div[2]/div[1]/div[1]/button[2]').get_attribute('textContent')
             sleep(.5)
         sleep(.5)
-while True:
-    try:
-        rodarBot()
-    except:
-        print('Reiniciando sistema...')
+
+rodarBot()

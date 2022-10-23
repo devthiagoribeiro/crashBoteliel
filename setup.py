@@ -36,7 +36,7 @@ def rodarBot():
     page.get('https://blaze.com/pt/games/crash')
     sleep(5)
     while True:
-        for x in range(500):
+        for x in range(25):
             entries = page.find_element(By.XPATH, '//*[@id="crash-recent"]/div[2]/div[2]').get_attribute('textContent')
             results = entries.split('X')
             floats = list(map(lambda x: float(x), results[:15]))

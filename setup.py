@@ -16,6 +16,9 @@ channelid = os.environ.get('CHANNEL_ID')
 link_blaze = '<a href="https://blaze.com/pt/games/crash">💻Blaze</a>'
 bot = telepot.Bot(bot_token)
 
+win_seguidos = 0
+loss_seguidos = 0
+
 def analise(lista):
     if (lista[7] == 1.00) and (lista[6] >= 2.00):
         bot.sendMessage(channelid, text=f'🚨Atenção🚨\n🎰Possível entrada...\n⏳Aguardar confirmação\n{link_blaze}', parse_mode='HTML', disable_web_page_preview=True)
@@ -24,13 +27,22 @@ def analise(lista):
     elif (lista[10] == 1.00) and (lista[9] >= 2.00):
         if lista[0] >= 2.00:
             bot.sendMessage(channelid, f'🏆Win!!')
+            win_seguidos += 1
+            loss_seguidos = 0
+            bot.sendMessage(chat_id, f'{win_seguidos} vitórias seguidas!')
         else:
             bot.sendMessage(channelid, '🔄Vamos para o gale 1')
     elif (lista[11] == 1.00) and (lista[10] >= 2.00):
         if (lista[0] >= 2.00) and (lista[1] < 2.00):
             bot.sendMessage(channelid, f'🏆Win!!')
+            win_seguidos += 1
+            loss_seguidos = 0
+            bot.sendMessage(chat_id, f'{win_seguidos} vitórias seguidas!')
         elif (lista[0] < 2.00) and (lista[1] < 2.00):
             bot.sendMessage(channelid, '❌Loss!!')
+            win_seguidos = 0
+            loss_seguidos += 1
+            bot.sendMessage(chat_id, f'{loss_seguidos} vitórias seguidas!')
 def rodarBot():
     page = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH') ,options=options)
     page.get('https://blaze.com/pt/games/crash')

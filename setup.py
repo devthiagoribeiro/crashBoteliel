@@ -37,12 +37,12 @@ def analise(lista):
             bot.sendMessage(channelid, f'🏆Win!!')
             win_seguidos += 1
             loss_seguidos = 0
-            bot.sendMessage(chat_id, f'{win_seguidos} vitórias seguidas!')
+            bot.sendMessage(channelid, f'{win_seguidos} vitórias seguidas!')
         elif (lista[0] < 2.00) and (lista[1] < 2.00):
             bot.sendMessage(channelid, '❌Loss!!')
             win_seguidos = 0
             loss_seguidos += 1
-            bot.sendMessage(chat_id, f'{loss_seguidos} vitórias seguidas!')
+            bot.sendMessage(channelid, f'{loss_seguidos} derrotas seguidas!')
 def rodarBot():
     page = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH') ,options=options)
     page.get('https://blaze.com/pt/games/crash')

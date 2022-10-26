@@ -34,7 +34,7 @@ def analise(lista):
             total_win += 1
             loss_seguidos = 0
             assertividade = total_win*100/(total_win + total_loss)
-            bot.sendMessage(chat_id, f'🎰PLACAR\nVitórias seguidas: {win_seguidos}\nTotal de vitórias: {total_win}\nTotal de derrotas: {total_loss}\nAssertividade: {assertividade}%')
+            bot.sendMessage(channelid, f'🎰PLACAR\nVitórias seguidas: {win_seguidos}\nTotal de vitórias: {total_win}\nTotal de derrotas: {total_loss}\nAssertividade: {assertividade}%')
         else:
             bot.sendMessage(channelid, '🔄Vamos para o gale 1')
     elif (lista[11] == 1.00) and (lista[10] >= 2.00):

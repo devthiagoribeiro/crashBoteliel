@@ -34,7 +34,7 @@ def analise(lista):
             total_win += 1
             loss_seguidos = 0
             assertividade = total_win*100/(total_win + total_loss)
-            bot.sendMessage(chat_id, f'{win_seguidos} vitórias seguidas!\n Total de vitórias: {total_win}\nTotal de derrotas: {total_loss}\nAssertividade: {assertividade}%')
+            bot.sendMessage(chat_id, f'🎰PLACAR\nVitórias seguidas: {win_seguidos}\nTotal de vitórias: {total_win}\nTotal de derrotas: {total_loss}\nAssertividade: {assertividade}%')
         else:
             bot.sendMessage(channelid, '🔄Vamos para o gale 1')
     elif (lista[11] == 1.00) and (lista[10] >= 2.00):
@@ -44,14 +44,14 @@ def analise(lista):
             total_win += 1
             loss_seguidos = 0
             assertividade = total_win*100/(total_win + total_loss)
-            bot.sendMessage(channelid, f'{win_seguidos} vitórias seguidas!\n Total de vitórias: {total_win}\nTotal de derrotas: {total_loss}\nAssertividade: {assertividade}%')
+            bot.sendMessage(channelid, f'🎰PLACAR\nVitórias seguidas: {win_seguidos}\nTotal de vitórias: {total_win}\nTotal de derrotas: {total_loss}\nAssertividade: {assertividade}%')
         elif (lista[0] < 2.00) and (lista[1] < 2.00):
             bot.sendMessage(channelid, '❌Loss!!')
             win_seguidos = 0
             loss_seguidos += 1
             total_loss += 1
             assertividade = total_win*100/(total_win + total_loss)
-            bot.sendMessage(channelid, f'PLACAR:\n{loss_seguidos} derrotas seguidas!\n Total de vitórias: {total_win}\nTotal de derrotas: {total_loss}\nAssertividade: {assertividade}%')
+            bot.sendMessage(channelid, f'🎰PLACAR:\nDerrotas seguidas: {loss_seguidos}\nTotal de vitórias: {total_win}\nTotal de derrotas: {total_loss}\nAssertividade: {assertividade}%')
 def rodarBot():
     page = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH') ,options=options)
     page.get('https://blaze.com/pt/games/crash')

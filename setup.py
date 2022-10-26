@@ -16,10 +16,13 @@ channelid = os.environ.get('CHANNEL_ID')
 link_blaze = '<a href="https://blaze.com/pt/games/crash">💻Blaze</a>'
 bot = telepot.Bot(bot_token)
 
-win_seguidos = 0
-loss_seguidos = 0
+
 
 def analise(lista):
+    win_seguidos = 0
+    loss_seguidos = 0
+    total_win = 0
+    total_loss = 0
     if (lista[7] == 1.00) and (lista[6] >= 2.00):
         bot.sendMessage(channelid, text=f'🚨Atenção🚨\n🎰Possível entrada...\n⏳Aguardar confirmação\n{link_blaze}', parse_mode='HTML', disable_web_page_preview=True)
     elif (lista[9] == 1.00) and (lista[8] >= 2.00):
@@ -28,21 +31,27 @@ def analise(lista):
         if lista[0] >= 2.00:
             bot.sendMessage(channelid, f'🏆Win!!')
             win_seguidos += 1
+            total_win += 1
             loss_seguidos = 0
-            bot.sendMessage(chat_id, f'{win_seguidos} vitórias seguidas!')
+            assertividade = total_win*100/(total_win + total_loss)
+            bot.sendMessage(chat_id, f'{win_seguidos} vitórias seguidas!\n Total de vitórias: {total_win}\nTotal de derrotas: {total_loss}\nAssertividade: {assertividade}%')
         else:
             bot.sendMessage(channelid, '🔄Vamos para o gale 1')
     elif (lista[11] == 1.00) and (lista[10] >= 2.00):
         if (lista[0] >= 2.00) and (lista[1] < 2.00):
             bot.sendMessage(channelid, f'🏆Win!!')
             win_seguidos += 1
+            total_win += 1
             loss_seguidos = 0
-            bot.sendMessage(channelid, f'{win_seguidos} vitórias seguidas!')
+            assertividade = total_win*100/(total_win + total_loss)
+            bot.sendMessage(channelid, f'{win_seguidos} vitórias seguidas!\n Total de vitórias: {total_win}\nTotal de derrotas: {total_loss}\nAssertividade: {assertividade}%')
         elif (lista[0] < 2.00) and (lista[1] < 2.00):
             bot.sendMessage(channelid, '❌Loss!!')
             win_seguidos = 0
             loss_seguidos += 1
-            bot.sendMessage(channelid, f'{loss_seguidos} derrotas seguidas!')
+            total_loss += 1
+            assertividade = total_win*100/(total_win + total_loss)
+            bot.sendMessage(channelid, f'PLACAR:\n{loss_seguidos} derrotas seguidas!\n Total de vitórias: {total_win}\nTotal de derrotas: {total_loss}\nAssertividade: {assertividade}%')
 def rodarBot():
     page = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH') ,options=options)
     page.get('https://blaze.com/pt/games/crash')

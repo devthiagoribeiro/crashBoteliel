@@ -19,6 +19,10 @@ bot = telepot.Bot(bot_token)
 
 
 def analise(lista):
+    win_seguidos = 0
+    loss_seguidos = 0
+    total_win = 0
+    total_loss = 0
     if (lista[7] == 1.00) and (lista[6] >= 2.00):
         bot.sendMessage(channelid, text=f'🚨Atenção🚨\n🎰Possível entrada...\n⏳Aguardar confirmação\n{link_blaze}', parse_mode='HTML', disable_web_page_preview=True)
     elif (lista[9] == 1.00) and (lista[8] >= 2.00):
@@ -53,10 +57,6 @@ def rodarBot():
     page.get('https://blaze.com/pt/games/crash')
     sleep(5)
     while True:
-        win_seguidos = 0
-        loss_seguidos = 0
-        total_win = 0
-        total_loss = 0
         for x in range(100):
             entries = page.find_element(By.XPATH, '//*[@id="crash-recent"]/div[2]/div[2]').get_attribute('textContent')
             results = entries.split('X')

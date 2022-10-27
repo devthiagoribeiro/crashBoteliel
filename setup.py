@@ -15,14 +15,13 @@ bot_token = os.environ.get('BOT_TOKEN')
 channelid = os.environ.get('CHANNEL_ID')
 link_blaze = '<a href="https://blaze.com/pt/games/crash">💻Blaze</a>'
 bot = telepot.Bot(bot_token)
-
+win_seguidos = 0
+loss_seguidos = 0
+total_win = 0
+total_loss = 0
 
 
 def analise(lista):
-    win_seguidos = 0
-    loss_seguidos = 0
-    total_win = 0
-    total_loss = 0
     if (lista[7] == 1.00) and (lista[6] >= 2.00):
         bot.sendMessage(channelid, text=f'🚨Atenção🚨\n🎰Possível entrada...\n⏳Aguardar confirmação\n{link_blaze}', parse_mode='HTML', disable_web_page_preview=True)
     elif (lista[9] == 1.00) and (lista[8] >= 2.00):
